@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Animal Builder</title>
+</head>
+<body>
+<form id="animalForm">
+  <label for="animalClass">Выберите тип животного:</label>
+  <select id="animalClass" name="animalClass">
+    <option value="1">Собака</option>
+    <option value="2">Кошка</option>
+    <option value="3">Хомяк</option>
+    <option value="4">Лошадь</option>
+    <option value="5">Верблюд</option>
+    <option value="6">Осел</option>
+  </select>
+  <br>
+  <label for="name">Введите имя:</label>
+  <input type="text" id="name" name="name"><br>
+  <label for="birthDate">Введите дату рождения:</label>
+  <input type="date" id="birthDate" name="birthDate"><br>
+  <button type="submit">Создать животное</button>
+</form>
+
+<div id="result"></div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script>
+  $(document).ready(function () {
+    $('#animalForm').on('submit', function (event) {
+      event.preventDefault();
+
+      var animalClass = $('select[name="animalClass"]').val();
+      var name = $('input[name="name"]').val();
+      var birthDate = $('input[name="birthDate"]').val();
+
+      $.ajax({
+        url: '/animal',
+        method: 'POST',
+        data: {
+          animalClass: animalClass,
+          name: name,
+          birthDate: birthDate
+        },
+        success: function (data) {
+          $('#result').html(data);
+        },
+        error: function (xhr, status, error) {
+          console.log(error);
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
