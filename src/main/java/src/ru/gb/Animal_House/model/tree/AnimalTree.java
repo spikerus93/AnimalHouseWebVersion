@@ -66,6 +66,45 @@ public class AnimalTree <E extends TreeNode<E>> implements Serializable, Iterabl
         }
     }
 
+    public String getAnimalList(){
+        StringBuilder animals = new StringBuilder();
+        for(E animal : animalList) {
+            animals.append(animal);
+        }
+        return animals.toString();
+    }
+
+    public String getInfo(){
+        StringBuilder animals = new StringBuilder();
+        animals.append("В ппитомнике: ");
+        animals.append(animalList.size());
+        animals.append(" животных \n");
+        for(E animal : animalList) {
+            animals.append(animal);
+            animals.append("\n");
+        }
+        return animals.toString();
+    }
+
+    public String getInfoById(long animalId){
+        StringBuilder animals = new StringBuilder("ID - ");
+        animals.append(animalId).append("\n").append("\n");
+        E animal = getById(animalId);
+        if(animal != null) {
+            animals.append("Тип: ");
+            animals.append(animal.getAnimalClass()).append("\n");
+            animals.append("Кличка: ");
+            animals.append(animal.getName()).append("\n");
+            animals.append("Дата рождения: ");
+            animals.append(animal.getBirthDate()).append("\n");
+        }
+        if(animal.getCommands() != null) {
+            animals.append(animal.getCommands()).append("\n");
+            return animals.toString();
+        }
+        return "Данных нет.";
+    }
+
     @Override
     @NonNull
     public Iterator<E> iterator() {
