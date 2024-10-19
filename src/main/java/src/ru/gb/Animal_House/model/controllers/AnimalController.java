@@ -5,6 +5,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import src.ru.gb.Animal_House.model.Animal;
+import src.ru.gb.Animal_House.model.service.AnimalService;
+import src.ru.gb.Animal_House.model.service.TrainAnimalRequest;
 
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +37,7 @@ public class AnimalController {
     }
     @GetMapping("/animals/list")
     public ResponseEntity<List<Animal>> listAnimals(@RequestParam(value = "species", required = false) String species) {
-        List<Animal> animals = animalService.listAnimals(species);
+        List<Animal> animals = animalService.();
         return new ResponseEntity<>(animals, HttpStatus.OK);
     }
 
@@ -47,7 +49,7 @@ public class AnimalController {
 
     @GetMapping("/animals/commands/{id}")
     public ResponseEntity<List<String>> getCommandsById(@PathVariable("id") long id) {
-        List<String> commands = animalService.getCommandsById(id);
+        List<String> commands = animalService.getCommands(id);
         return new ResponseEntity<>(commands, HttpStatus.OK);
     }
 

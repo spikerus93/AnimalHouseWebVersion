@@ -8,5 +8,5 @@ import java.util.Optional;
 
 public interface AnimalRepository extends CrudRepository {
     Optional<Animal> findById(Long id);
-    List<Animal> findAll(Animal animal);
+    List<Animal> findAll(long animal);
 }
