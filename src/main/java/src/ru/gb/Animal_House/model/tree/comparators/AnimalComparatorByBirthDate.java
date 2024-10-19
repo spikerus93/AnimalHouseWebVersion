@@ -4,10 +4,9 @@ import src.ru.gb.Animal_House.model.tree.TreeNode;
 
 import java.util.Comparator;
 
-public class AnimalComparatorByName <E extends TreeNode<E>> implements Comparator<E> {
-
+public class AnimalComparatorByBirthDate <E extends TreeNode<E>> implements Comparator<E> {
     @Override
     public int compare(E o1, E o2) {
-        return (o1.getName().compareTo(o2.getName()));
+        return (o1.getBirthDate().compareTo(o2.getBirthDate()));
     }
 }
