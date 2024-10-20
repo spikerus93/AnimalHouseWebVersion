@@ -43,12 +43,12 @@ public class Animal implements TreeNode<Animal> {
     @ElementCollection
     private List<String> commands;
 
-    public Animal() {}
+    protected Animal() {}
 
     public Animal(String name, LocalDate birthDate, String animalClass) {
         this.name = name;
         this.birthDate = birthDate;
-        this.animalClass = "Животное";
+        this.animalClass = animalClass;
         this.commands = new ArrayList<>();
     }
 
