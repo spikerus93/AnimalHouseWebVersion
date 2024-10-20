@@ -95,9 +95,6 @@ public class AnimalService {
         animalTree.getInfo();
     }
 
-    public String getAnimals() {
-        return getAllAnimals().toString();
-    }
     public boolean checkId(Long id) {
         return animalTree.checkId(id);
     }

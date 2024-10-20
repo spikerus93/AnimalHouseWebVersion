@@ -48,8 +48,8 @@ public class AnimalController {
     }
     @GetMapping("/animals/list")
     public ResponseEntity<String> listAnimals(@RequestParam(value = "AnimalList", required = false) String animalList) {
-        String animals = animalService.getAllAnimals();
-        return new ResponseEntity<>(animals, HttpStatus.OK);
+        animalList = animalService.getAllAnimals();
+        return new ResponseEntity<>(animalList, HttpStatus.OK);
     }
 
     @DeleteMapping("/animals/{id}")
@@ -70,15 +70,9 @@ public class AnimalController {
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
-    @GetMapping("/animals/generalinfo")
-    public ResponseEntity<String> generalInfo() {
-        String animals = animalService.getAllAnimals();
-        return new ResponseEntity<>(animals, HttpStatus.OK);
-    }
-
     @GetMapping("/animals/sorted/name")
     public ResponseEntity<Void> sortedByName() {
-        animalService.sortAnimalsByName();
+        animalService.sortByName();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
