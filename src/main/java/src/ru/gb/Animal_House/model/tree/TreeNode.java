@@ -1,8 +1,8 @@
 package src.ru.gb.Animal_House.model.tree;
 
 import lombok.NonNull;
-import org.springframework.data.jpa.repository.JpaRepository;
 import src.ru.gb.Animal_House.model.Animal;
+import src.ru.gb.Animal_House.model.animalclass.AnimalClass;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -21,5 +21,5 @@ public interface TreeNode <E> {
     String getName();
     LocalDate getBirthDate();
     String getCommands();
-    String getAnimalClass();
+    AnimalClass getAnimalClass();
 }

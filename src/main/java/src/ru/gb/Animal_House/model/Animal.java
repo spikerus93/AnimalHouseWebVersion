@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.jpa.convert.threeten.Jsr310JpaConverters;
 import org.springframework.security.core.userdetails.User;
+import src.ru.gb.Animal_House.model.animalclass.AnimalClass;
 import src.ru.gb.Animal_House.model.tree.TreeNode;
 
 
@@ -29,10 +30,8 @@ public class Animal implements TreeNode<Animal> {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    @Getter
     @lombok.Setter
-    @ToString.Exclude
-    public String animalClass;
+    private AnimalClass animalClass;
 
     @Column(nullable = false)
     @Setter
@@ -45,7 +44,7 @@ public class Animal implements TreeNode<Animal> {
 
     protected Animal() {}
 
-    public Animal(String name, LocalDate birthDate, String animalClass) {
+    public Animal(String name, LocalDate birthDate, AnimalClass animalClass) {
         this.name = name;
         this.birthDate = birthDate;
         this.animalClass = animalClass;
