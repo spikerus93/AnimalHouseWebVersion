@@ -3,7 +3,6 @@ package src.ru.gb.Animal_House.model.controllers;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,8 +18,7 @@ public class AnimalController {
     private AnimalService animalService;
     @Setter
     @Getter
-    @Qualifier("animal")
-    @Autowired
+
     private Animal animal;
 
     @GetMapping("/")
@@ -45,12 +43,12 @@ public class AnimalController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("/animals/{id}/")
-    public long getAnimalById(@PathVariable ("id") long id) {
+    public String getAnimalById(@PathVariable ("id") long id) {
         return animalService.getAnimalById(id);
     }
     @GetMapping("/animals/list")
-    public ResponseEntity<List<Animal>> listAnimals(@RequestParam(value = "AnimalList", required = false) String animalList) {
-        List<Animal> animals = animalService.getAllAnimals();
+    public ResponseEntity<String> listAnimals(@RequestParam(value = "AnimalList", required = false) String animalList) {
+        String animals = animalService.getAllAnimals();
         return new ResponseEntity<>(animals, HttpStatus.OK);
     }
 
@@ -73,15 +71,15 @@ public class AnimalController {
     }
 
     @GetMapping("/animals/generalinfo")
-    public ResponseEntity<List<Animal>> generalInfo() {
-        List<Animal> animals = animalService.getAllAnimals();
+    public ResponseEntity<String> generalInfo() {
+        String animals = animalService.getAllAnimals();
         return new ResponseEntity<>(animals, HttpStatus.OK);
     }
 
     @GetMapping("/animals/sorted/name")
-    public ResponseEntity<List<Animal>> sortedByName() {
-        List<Animal> animals = animalService.sortAnimalsByName();
-        return new ResponseEntity<>(animals, HttpStatus.OK);
+    public ResponseEntity<Void> sortedByName() {
+        animalService.sortAnimalsByName();
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @GetMapping("/animals/sorted/birthdate")

@@ -1,15 +1,17 @@
 package src.ru.gb.Animal_House.model.tree;
 
+import lombok.NonNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 import src.ru.gb.Animal_House.model.Animal;
 
-import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
-public interface TreeNode <E> extends Serializable, JpaRepository<Animal, Long> {
-    Optional<Animal> findById(Long id);
+public interface TreeNode <E> {
+    @NonNull
+    Optional<Animal> findById(@NonNull Long id);
+    @NonNull
     List<Animal> findAll();
     List<Animal> findByName(String name);
     List<Animal> findByBirthDate(LocalDate birthDate);
@@ -18,7 +20,6 @@ public interface TreeNode <E> extends Serializable, JpaRepository<Animal, Long> 
     long getAnimalId();
     String getName();
     LocalDate getBirthDate();
-    List<E>getAnimals();
     String getCommands();
     String getAnimalClass();
 }

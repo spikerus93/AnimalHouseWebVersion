@@ -4,6 +4,7 @@ import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
 import org.springframework.stereotype.Repository;
+import src.ru.gb.Animal_House.model.Animal;
 import src.ru.gb.Animal_House.model.tree.comparators.AnimalComparatorByBirthDate;
 import src.ru.gb.Animal_House.model.tree.comparators.AnimalComparatorByName;
 

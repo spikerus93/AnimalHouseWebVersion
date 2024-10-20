@@ -1,7 +1,6 @@
 package src.ru.gb.Animal_House.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import src.ru.gb.Animal_House.model.Animal;
 import src.ru.gb.Animal_House.model.AnimalBuilder;
@@ -12,9 +11,6 @@ import java.util.*;
 
 @Service
 public class AnimalService {
-    @Qualifier("treeNode")
-    @Autowired
-    private TreeNode root;
 
     private AnimalTree<Animal> animalTree;
     private AnimalBuilder animalBuilder;
@@ -25,13 +21,12 @@ public class AnimalService {
     }
 
     public Animal addAnimal(Animal animal) {
-        root.save(animal);
+        animalTree.add(animal);
         return animal;
     }
 
     public Animal updateAnimal(Long id, Animal animal) {
         animal.setAnimalId(id);
-        root.save(animal);
         return animal;
     }
 
@@ -40,22 +35,21 @@ public class AnimalService {
         if (animalOptional.isPresent()) {
             Animal animal = animalOptional.get();
             animal.setCommands(commands);
-            root.save(animal);
         } else {
             throw new NoSuchElementException("Animal not found with this id");
         }
     }
 
-    public long getAnimalById(Long id) {
-        return (long) root.findById(id).orElseThrow();
+    public String getAnimalById(Long id) {
+        return animalTree.getInfoById(id);
     }
 
-    public List<Animal> getAllAnimals() {
-        return root.getAnimals();
+    public String getAllAnimals() {
+        return animalTree.getAnimalList();
     }
 
     public void deleteAnimal(long id) {
-        root.delete(id);
+        animalTree.remove(id);
     }
 
     public void addCommand(Long id, String command) {
@@ -78,11 +72,11 @@ public class AnimalService {
     }
 
     public int countAnimals() {
-        return root.getAnimals().size();
+        return animalTree.getCounter();
     }
 
-    public List<Animal> sortAnimalsByName() {
-        return animalTree.sortAnimalsByName();
+    public void sortAnimalsByName() {
+        animalTree.sortByNName();
     }
 
     public void saveAnimals() {
@@ -98,7 +92,7 @@ public class AnimalService {
     }
 
     public void loadAnimals() {
-        root.getAnimals().clear();
+        animalTree.getInfo();
     }
 
     public String getAnimals() {

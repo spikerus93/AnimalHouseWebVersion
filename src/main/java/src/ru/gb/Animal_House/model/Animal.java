@@ -66,20 +66,24 @@ public class Animal implements TreeNode<Animal> {
         this.commands.addAll(command);
     }
 
-    public Optional<Animal> findById(Long id) {
+    @Override
+    public @NonNull Optional<Animal> findById(@NonNull Long id) {
         return Optional.empty();
     }
 
-    public List<Animal> findAll() {
-        return List.of();
+    @Override
+    public @NonNull List<Animal> findAll() {
+        return List.of((Animal) findAll());
     }
 
+    @Override
     public List<Animal> findByName(String name) {
-        return List.of();
+        return List.of((Animal) findByName(name));
     }
 
+    @Override
     public List<Animal> findByBirthDate(LocalDate birthDate) {
-        return List.of();
+        return List.of((Animal) findByBirthDate(birthDate));
     }
 
     public void setAnimalId(long id) {
@@ -90,11 +94,7 @@ public class Animal implements TreeNode<Animal> {
         return 0;
     }
 
-    public List<Animal> getAnimals() {
-        return List.of();
-    }
-
-    public String getCommands() {
+     public String getCommands() {
         if (!(this.commands).isEmpty()) {
             StringBuilder sb = new StringBuilder();
             sb.append(this.commands);
