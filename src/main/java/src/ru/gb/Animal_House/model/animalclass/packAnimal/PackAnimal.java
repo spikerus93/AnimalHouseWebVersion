@@ -1,12 +1,18 @@
 package src.ru.gb.Animal_House.model.animalclass.packAnimal;
 
-import src.ru.gb.Animal_House.model.Animal;
+import lombok.Getter;
 
 import java.time.LocalDate;
 
-public class PackAnimal extends Animal {
-    public PackAnimal(String name, LocalDate birthDate) {
-        super(name, birthDate);
-        this.animalClass = ("Вьючное животное, Семейство: ");
+@Getter
+public abstract class PackAnimal{
+    protected  String name;
+    protected LocalDate birthDate;
+
+    public PackAnimal(String name, LocalDate birthDate){
+        this.name = name;
+        this.birthDate = birthDate;
     }
+
+    public abstract String getAnimalClass();
 }
