@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Питомник</title>
+</head>
+<body>
+<h1>Добро Пожаловать!!!</h1>
+
+<p>Выберите действие:</p>
+
+<ul>
+  <li><button id="addNewAnimalButton">1. Добавить новое животное</button></li><br>
+  <li><button id="trainAnimalButton">2. Обучение животного новым командам</button></li><br>
+  <li><button id="viewCommandListByIdButton">3. Смотреть Список команд по ID</button></li><br>
+  <li><button id="countAnimalsInPetShopButton">4. Счетчик кол-ва животных в Питомнике</button></li><br>
+  <li><button id="getDataByIdButton">5. Получить данные по ID</button></li><br>
+  <li><button id="showGeneralInfoButton">6. Общая информация по Питомнику</button></li><br>
+  <li><button id="sortByNameButton">7. Сортировка данных по Имени</button></li><br>
+  <li><button id="sortByDateOfBirthButton">8. Сортировка данных по Дате рождения</button></li><br>
+  <li><button id="saveDataButton">9. Сохранить данные.</button></li><br>
+  <li><button id="loadDataButton">10. Загрузить данные</button></li><br>
+  <li><button id="deleteAnimalRecordButton">11. Удалить сведения о животном из реестра</button></li><br>
+  <li><button id="exitAppButton">12. Завершить работу.</button></li>
+</ul>
+<script src="addNewAnimal.js"></script>
+<script src="trainAnimal.js"></script>
+<script src="viewCommandListById.js"></script>
+<script src="countAnimalsInPetShop.js"></script>
+<script src="getDataById.js"></script>
+<script src="showGeneralInfo.js"></script>
+<script src="sortByName.js"></script>
+<script src="sortByDateOfBirth.js"></script>
+<script src="saveData.js"></script>
+<script src="loadData.js"></script>
+<script src="deleteAnimalRecord.js"></script>
+<script src="exitApp.js"></script>
+<script>
+  const addNewAnimalButton = document.getElementById('addNewAnimalButton');
+  const trainAnimalButton = document.getElementById('trainAnimalButton');
+  const viewCommandListByIdButton = document.getElementById('viewCommandListByIdButton');
+  const countAnimalsInPetShopButton = document.getElementById('countAnimalsInPetShopButton');
+  const getDataByIdButton = document.getElementById('getDataByIdButton');
+  const showGeneralInfoButton = document.getElementById('showGeneralInfoButton');
+  const sortByNameButton = document.getElementById('sortByNameButton');
+  const sortByDateOfBirthButton = document.getElementById('sortByDateOfBirthButton');
+  const saveDataButton = document.getElementById('saveDataButton');
+  const loadDataButton = document.getElementById('loadDataButton');
+  const deleteAnimalRecordButton = document.getElementById('deleteAnimalRecordButton');
+  const exitAppButton = document.getElementById('exitAppButton');
+
+  addNewAnimalButton.addEventListener('click', addNewAnimal);
+  trainAnimalButton.addEventListener('click', trainAnimal);
+  viewCommandListByIdButton.addEventListener('click', viewCommandListById);
+  countAnimalsInPetShopButton.addEventListener('click', countAnimalsInPetShop);
+  getDataByIdButton.addEventListener('click', getDataById);
+  showGeneralInfoButton.addEventListener('click', showGeneralInfo);
+  sortByNameButton.addEventListener('click', sortByName);
+  sortByDateOfBirthButton.addEventListener('click', sortByDateOfBirth);
+  saveDataButton.addEventListener('click', saveData);
+  loadDataButton.addEventListener('click', loadData);
+  deleteAnimalRecordButton.addEventListener('click', deleteAnimalRecord);
+  exitAppButton.addEventListener('click', exitApp);
+
+  function addNewAnimal() {
+    console.log('Добавление нового животного...');
+
+  }
+
+  function trainAnimal() {
+    console.log('Обучение животного новым командам...');
+  }
+
+  function viewCommandListById() {
+    console.log('Просмотр списка команд по ID...');
+  }
+
+  function countAnimalsInPetShop() {
+    console.log('Подсчет количества животных в питомнике...');
+  }
+
+  function getDataById() {
+    console.log('Получение данных по ID...');
+  }
+
+  function showGeneralInfo() {
+    console.log('Показать общую информацию по питомнику...');
+  }
+
+  function sortByName() {
+    console.log('Сортировка данных по имени...');
+  }
+
+  function sortByDateOfBirth() {
+    console.log('Сортировка данных по дате рождения...');
+  }
+
+  function saveData() {
+    console.log('Сохранение данных...');
+  }
+
+  function loadData() {
+    console.log('Загрузка данных...');
+  }
+
+  function deleteAnimalRecord() {
+    console.log('Удаление сведений о животном из реестра...');
+  }
+
+  function exitApp() {
+    console.log('Завершение работы...');
+  }
+</script>
+</body>
+</html>

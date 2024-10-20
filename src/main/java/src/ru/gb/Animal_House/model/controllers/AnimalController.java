@@ -21,11 +21,6 @@ public class AnimalController {
 
     private Animal animal;
 
-    @GetMapping("/")
-    public String welcome() {
-        return "Welcome to Animal House";
-    }
-
     @PostMapping("/animals/add")
     public Animal addAnimal(@RequestBody Animal animal) {
         return animalService.addAnimal(animal);
