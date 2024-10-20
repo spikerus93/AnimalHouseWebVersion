@@ -15,7 +15,7 @@ public class AnimalBuilder extends Animal{
         private static final int CAMEL = 5;
         private static final int DONKEY = 6;
 
-        private AnimalBuilder() {}
+        public AnimalBuilder() {}
 
         public static Animal createAnimal(int animalClass, String name, LocalDate birthDate) {
             return switch (animalClass) {

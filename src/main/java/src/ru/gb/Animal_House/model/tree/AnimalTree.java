@@ -3,12 +3,16 @@ package src.ru.gb.Animal_House.model.tree;
 import lombok.Getter;
 import lombok.NonNull;
 import lombok.Setter;
+import org.springframework.stereotype.Repository;
+import src.ru.gb.Animal_House.model.tree.comparators.AnimalComparatorByBirthDate;
+import src.ru.gb.Animal_House.model.tree.comparators.AnimalComparatorByName;
 
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+@Repository
 public class AnimalTree <E extends TreeNode<E>> implements Serializable, Iterable<E>{
     @Getter
     @Setter
@@ -66,6 +70,14 @@ public class AnimalTree <E extends TreeNode<E>> implements Serializable, Iterabl
         }
     }
 
+    public void sortByNName(){
+        animalList.sort(new AnimalComparatorByName<>());
+    }
+
+    public void sortByBirthDate(){
+        animalList.sort(new AnimalComparatorByBirthDate<>());
+    }
+
     public String getAnimalList(){
         StringBuilder animals = new StringBuilder();
         for(E animal : animalList) {
@@ -76,7 +88,7 @@ public class AnimalTree <E extends TreeNode<E>> implements Serializable, Iterabl
 
     public String getInfo(){
         StringBuilder animals = new StringBuilder();
-        animals.append("В ппитомнике: ");
+        animals.append("В питомнике: ");
         animals.append(animalList.size());
         animals.append(" животных \n");
         for(E animal : animalList) {
@@ -103,6 +115,11 @@ public class AnimalTree <E extends TreeNode<E>> implements Serializable, Iterabl
             return animals.toString();
         }
         return "Данных нет.";
+    }
+
+    @Override
+    public String toString() {
+        return getInfo();
     }
 
     @Override

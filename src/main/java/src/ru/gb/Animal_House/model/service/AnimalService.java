@@ -1,67 +1,118 @@
 package src.ru.gb.Animal_House.model.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import src.ru.gb.Animal_House.model.Animal;
 import src.ru.gb.Animal_House.model.AnimalBuilder;
 import src.ru.gb.Animal_House.model.tree.AnimalTree;
-import src.ru.gb.Animal_House.repo.AnimalRepository;
+import src.ru.gb.Animal_House.model.tree.TreeNode;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class AnimalService {
+    @Qualifier("treeNode")
     @Autowired
-    private AnimalRepository animalRepository;
+    private TreeNode root;
 
     private AnimalTree<Animal> animalTree;
-    private final AnimalBuilder animalBuilder;
+    private AnimalBuilder animalBuilder;
 
     public AnimalService() {
         animalTree = new AnimalTree<>();
         animalBuilder = new AnimalBuilder();
     }
 
-    public void addAnimal(AddAnimalRequest request){
-    Animal animal = new Animal((request.getName(),
-            request.getBirthDate(),
-            request.getAnimalClass(),
-            request.getCommands());
-    animalRepository.save(animal);
+    public Animal addAnimal(Animal animal) {
+        root.save(animal);
+        return animal;
     }
-    public void trainAnimal(long id, List<String>commands){
-        Optional<Animal> animalOptional = animalRepository.findById(id);
-        if(animalOptional.isPresent()){
+
+    public Animal updateAnimal(Long id, Animal animal) {
+        animal.setAnimalId(id);
+        root.save(animal);
+        return animal;
+    }
+
+    public void trainAnimal(long id, List<String> commands) {
+        Optional<Animal> animalOptional = Optional.ofNullable(animalTree.getById(id));
+        if (animalOptional.isPresent()) {
             Animal animal = animalOptional.get();
-            animal.setCommands(String.valueOf(commands));
-            animalRepository.save(animal);
-        }
-        else {
+            animal.setCommands(commands);
+            root.save(animal);
+        } else {
             throw new NoSuchElementException("Animal not found with this id");
         }
     }
-    public Optional<Animal> getAnimalById(long id){
-        return animalRepository.findById(id);
+
+    public long getAnimalById(Long id) {
+        return (long) root.findById(id).orElseThrow();
     }
-    public List<Animal> getAllAnimals(long animalId){
-        return animalRepository.findAll(animalId);
+
+    public List<Animal> getAllAnimals() {
+        return root.getAnimals();
     }
-    public void deleteAnimal(long id){
-        animalRepository.deleteById(id);
+
+    public void deleteAnimal(long id) {
+        root.delete(id);
     }
-    public List<String> getCommands(long id){
-        Optional<Animal> animalOptional = animalRepository.findById(id);
-        if(animalOptional.isPresent()){
+
+    public void addCommand(Long id, String command) {
+        Animal animal = animalTree.getById(id);
+        animal.setCommands(Arrays.asList(command.split(" ")));
+        updateAnimal(id, animal);
+    }
+
+    public String seeCommands(Long id) {
+        return animalTree.getById(id).getCommands();
+    }
+
+    public List<String> getCommands(Long id) {
+        Optional<Animal> animalOptional = Optional.ofNullable(animalTree.getById(id));
+        if (animalOptional.isPresent()) {
             return Collections.singletonList(animalOptional.get().getCommands());
         } else {
             throw  new NoSuchElementException("Animal not found with this ID");
         }
     }
-    public int countAnimals(long animalId){
-        return Math.toIntExact(animalRepository.count());
+
+    public int countAnimals() {
+        return root.getAnimals().size();
     }
-    public List<Animal> sortAnimalsByName(){
-        return animalRepository.findAll().forEach().sorted(Comparator.comparing(Animal::getBirthDate).reversed()).collect(Collectors.toList());
+
+    public List<Animal> sortAnimalsByName() {
+        return animalTree.sortAnimalsByName();
+    }
+
+    public void saveAnimals() {
+
+    }
+
+    public List<Animal> sortByBirthDate() {
+        animalTree.sortByBirthDate();
+        return null;
+    }
+    public void sortByName() {
+        animalTree.sortByNName();
+    }
+
+    public void loadAnimals() {
+        root.getAnimals().clear();
+    }
+
+    public String getAnimals() {
+        return getAllAnimals().toString();
+    }
+    public boolean checkId(Long id) {
+        return animalTree.checkId(id);
+    }
+
+    public String getAnimalsTree() {
+        return animalTree.getInfo();
+    }
+
+    public String getInfoById(Long id){
+        return animalTree.getInfoById(id);
     }
 }

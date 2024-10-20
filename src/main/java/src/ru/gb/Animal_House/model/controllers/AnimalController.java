@@ -1,6 +1,9 @@
 package src.ru.gb.Animal_House.model.controllers;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -9,12 +12,16 @@ import src.ru.gb.Animal_House.model.service.AnimalService;
 import src.ru.gb.Animal_House.model.service.TrainAnimalRequest;
 
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 public class AnimalController {
     @Autowired
     private AnimalService animalService;
+    @Setter
+    @Getter
+    @Qualifier("animal")
+    @Autowired
+    private Animal animal;
 
     @GetMapping("/")
     public String welcome() {
@@ -22,22 +29,28 @@ public class AnimalController {
     }
 
     @PostMapping("/animals/add")
-    public ResponseEntity<Animal> addAnimal(@RequestBody Animal animal) {
-        animal = animalService.addAnimal(request);
-        return new ResponseEntity<>(animal, HttpStatus.CREATED);
+    public Animal addAnimal(@RequestBody Animal animal) {
+        return animalService.addAnimal(animal);
     }
+
+    @PutMapping("/{id}")
+    public Animal updateAnimal(@PathVariable Long id, @RequestBody Animal animal) {
+        animal.setId(id);
+        return animalService.updateAnimal(id, animal);
+    }
+
     @PutMapping("animals/{id}/train")
     public ResponseEntity<Void> trainAnimal(@PathVariable ("id") long id, @RequestBody TrainAnimalRequest request) {
         animalService.trainAnimal(id,request.getCommands());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
     @GetMapping("/animals/{id}/")
-    public ResponseEntity<Animal> getAnimalById(@PathVariable ("id") long id) {
-        Optional<Animal> animalOptional = animalService.getAnimalById(id);
+    public long getAnimalById(@PathVariable ("id") long id) {
+        return animalService.getAnimalById(id);
     }
     @GetMapping("/animals/list")
-    public ResponseEntity<List<Animal>> listAnimals(@RequestParam(value = "species", required = false) String species) {
-        List<Animal> animals = animalService.();
+    public ResponseEntity<List<Animal>> listAnimals(@RequestParam(value = "AnimalList", required = false) String animalList) {
+        List<Animal> animals = animalService.getAllAnimals();
         return new ResponseEntity<>(animals, HttpStatus.OK);
     }
 
@@ -71,9 +84,9 @@ public class AnimalController {
         return new ResponseEntity<>(animals, HttpStatus.OK);
     }
 
-    @GetMapping("/animals/sorted/dateofbirth")
-    public ResponseEntity<List<Animal>> sortedByDateOfBirth() {
-        List<Animal> animals = animalService.sortAnimalsByDateOfBirth();
+    @GetMapping("/animals/sorted/birthdate")
+    public ResponseEntity<List<Animal>> sortedByBirthDate() {
+        List<Animal> animals = animalService.sortByBirthDate();
         return new ResponseEntity<>(animals, HttpStatus.OK);
     }
 
@@ -87,5 +100,15 @@ public class AnimalController {
     public ResponseEntity<Void> loadAnimals() {
         animalService.loadAnimals();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    @GetMapping("/animals/getDataById")
+    public String getDataById(@RequestParam(value = "AnimalId") long animalId) {
+        return animalService.getInfoById(animalId);
+    }
+
+    @GetMapping("/animals/showInfoByAnimals")
+    public String showInfoByAnimals(@RequestParam(value = "AnimalList", required = false) String animalList) {
+        return animalService.getAnimalsTree();
     }
 }
