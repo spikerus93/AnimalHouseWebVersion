@@ -5,14 +5,15 @@
   <title>Питомник</title>
 </head>
 <body>
-<h1>Добро Пожаловать!!!</h1>
+<h1>WebVersion_Animal_House</h1><br>
+<h2>Добро Пожаловать!!!</h2><br>
 
 <p>Выберите действие:</p>
 
 <ul>
-  <li><button id="addNewAnimalButton">1. Добавить новое животное</button></li><br>
-  <li><button id="trainAnimalButton">2. Обучение животного новым командам</button></li><br>
-  <li><button id="viewCommandListByIdButton">3. Смотреть Список команд по ID</button></li><br>
+  <li><button id="HandleAddNewAnimal">1. Добавить новое животное</button></li><br>
+  <li><button id="HandleTrainAnimal">2. Обучение животного новым командам</button></li><br>
+  <li><button id="HandleViewCommandListByIdButton">3. Смотреть Список команд по ID</button></li><br>
   <li><button id="countAnimalsInPetShopButton">4. Счетчик кол-ва животных в Питомнике</button></li><br>
   <li><button id="getDataByIdButton">5. Получить данные по ID</button></li><br>
   <li><button id="showGeneralInfoButton">6. Общая информация по Питомнику</button></li><br>
@@ -36,9 +37,9 @@
 <script src="deleteAnimalRecord.js"></script>
 <script src="exitApp.js"></script>
 <script>
-  const addNewAnimalButton = document.getElementById('addNewAnimalButton');
-  const trainAnimalButton = document.getElementById('trainAnimalButton');
-  const viewCommandListByIdButton = document.getElementById('viewCommandListByIdButton');
+  const HandleAddNewAnimalButton = document.getElementById('HandleAddNewAnimal');
+  const HandleTrainAnimalButton = document.getElementById('HandleTrainAnimal');
+  const HandleViewCommandListByIdButton = document.getElementById('HandleViewCommandListById');
   const countAnimalsInPetShopButton = document.getElementById('countAnimalsInPetShopButton');
   const getDataByIdButton = document.getElementById('getDataByIdButton');
   const showGeneralInfoButton = document.getElementById('showGeneralInfoButton');
@@ -49,9 +50,9 @@
   const deleteAnimalRecordButton = document.getElementById('deleteAnimalRecordButton');
   const exitAppButton = document.getElementById('exitAppButton');
 
-  addNewAnimalButton.addEventListener('click', addNewAnimal);
-  trainAnimalButton.addEventListener('click', trainAnimal);
-  viewCommandListByIdButton.addEventListener('click', viewCommandListById);
+  HandleAddNewAnimalButton.addEventListener('click', addNewAnimal);
+  HandleTrainAnimalButton.addEventListener('click', trainAnimal);
+  HandleViewCommandListByIdButton.addEventListener('click', viewCommandListById);
   countAnimalsInPetShopButton.addEventListener('click', countAnimalsInPetShop);
   getDataByIdButton.addEventListener('click', getDataById);
   showGeneralInfoButton.addEventListener('click', showGeneralInfo);
@@ -62,16 +63,19 @@
   deleteAnimalRecordButton.addEventListener('click', deleteAnimalRecord);
   exitAppButton.addEventListener('click', exitApp);
 
-  function addNewAnimal() {
+  function HandleAddNewAnimal() {
+    addNewAnimal();
     console.log('Добавление нового животного...');
 
   }
 
-  function trainAnimal() {
+  function HandleTrainAnimal() {
+    trainAnimal();
     console.log('Обучение животного новым командам...');
   }
 
-  function viewCommandListById() {
+  function HandleViewCommandListById() {
+    viewCommandListById();
     console.log('Просмотр списка команд по ID...');
   }
 
