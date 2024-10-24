@@ -21,7 +21,8 @@ public class AnimalController {
 
     private Animal animal;
 
-    @PostMapping("/animals/add")
+
+    @PostMapping("/addNewAnimal.js")
     public Animal addAnimal(@RequestBody Animal animal) {
         return animalService.addAnimal(animal);
     }
@@ -32,70 +33,61 @@ public class AnimalController {
         return animalService.updateAnimal(id, animal);
     }
 
-    @PutMapping("animals/{id}/train")
+    @PutMapping("/trainAnimal.js")
     public ResponseEntity<Void> trainAnimal(@PathVariable ("id") long id, @RequestBody TrainAnimalRequest request) {
         animalService.trainAnimal(id,request.getCommands());
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
-    @GetMapping("/animals/{id}/")
+    @GetMapping("/getDataById.js{id}/")
     public String getAnimalById(@PathVariable ("id") long id) {
         return animalService.getAnimalById(id);
     }
-    @GetMapping("/animals/list")
+
+    @GetMapping("/showGeneralInfo.js")
     public ResponseEntity<String> listAnimals(@RequestParam(value = "AnimalList", required = false) String animalList) {
         animalList = animalService.getAllAnimals();
         return new ResponseEntity<>(animalList, HttpStatus.OK);
     }
 
-    @DeleteMapping("/animals/{id}")
+    @DeleteMapping("/deleteAnimalRecord.js/{id}")
     public ResponseEntity<Void> deleteAnimal(@PathVariable("id") long id) {
         animalService.deleteAnimal(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/animals/commands/{id}")
+    @GetMapping("/viewCommandListById.js/{id}")
     public ResponseEntity<List<String>> getCommandsById(@PathVariable("id") long id) {
         List<String> commands = animalService.getCommands(id);
         return new ResponseEntity<>(commands, HttpStatus.OK);
     }
 
-    @GetMapping("/animals/count")
+    @GetMapping("/countAnimalsInPetShop.js")
     public ResponseEntity<Integer> countAnimals() {
         Integer count = animalService.countAnimals();
         return new ResponseEntity<>(count, HttpStatus.OK);
     }
 
-    @GetMapping("/animals/sorted/name")
+    @GetMapping("/sortByName.js")
     public ResponseEntity<Void> sortedByName() {
         animalService.sortByName();
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/animals/sorted/birthdate")
+    @GetMapping("/sortByDateOfBirth.js")
     public ResponseEntity<List<Animal>> sortedByBirthDate() {
         List<Animal> animals = animalService.sortByBirthDate();
         return new ResponseEntity<>(animals, HttpStatus.OK);
     }
 
-    @GetMapping("/animals/save")
+    @GetMapping("/saveData.js")
     public ResponseEntity<Void> saveAnimals() {
         animalService.saveAnimals();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @GetMapping("/animals/load")
+    @GetMapping("/loadData.js")
     public ResponseEntity<Void> loadAnimals() {
         animalService.loadAnimals();
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-    }
-
-    @GetMapping("/animals/getDataById")
-    public String getDataById(@RequestParam(value = "AnimalId") long animalId) {
-        return animalService.getInfoById(animalId);
-    }
-
-    @GetMapping("/animals/showInfoByAnimals")
-    public String showInfoByAnimals(@RequestParam(value = "AnimalList", required = false) String animalList) {
-        return animalService.getAnimalsTree();
     }
 }

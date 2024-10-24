@@ -24,18 +24,18 @@
   <li><button id="deleteAnimalRecordButton">11. Удалить сведения о животном из реестра</button></li><br>
   <li><button id="exitAppButton">12. Завершить работу.</button></li>
 </ul>
-<script src="addNewAnimal.js"></script>
-<script src="trainAnimal.js"></script>
-<script src="viewCommandListById.js"></script>
-<script src="countAnimalsInPetShop.js"></script>
-<script src="getDataById.js"></script>
-<script src="showGeneralInfo.js"></script>
-<script src="sortByName.js"></script>
-<script src="sortByDateOfBirth.js"></script>
-<script src="saveData.js"></script>
-<script src="loadData.js"></script>
-<script src="deleteAnimalRecord.js"></script>
-<script src="exitApp.js"></script>
+<script src="./addNewAnimal.js"></script>
+<script src="./trainAnimal.js"></script>
+<script src="./viewCommandListById.js"></script>
+<script src="./countAnimalsInPetShop.js"></script>
+<script src="./getDataById.js"></script>
+<script src="./showGeneralInfo.js"></script>
+<script src="./sortByName.js"></script>
+<script src="./sortByDateOfBirth.js"></script>
+<script src="./saveData.js"></script>
+<script src="./loadData.js"></script>
+<script src="./deleteAnimalRecord.js"></script>
+<script src="./exitApp.js"></script>
 <script>
   const HandleAddNewAnimalButton = document.getElementById('HandleAddNewAnimal');
   const HandleTrainAnimalButton = document.getElementById('HandleTrainAnimal');
@@ -63,18 +63,18 @@
   deleteAnimalRecordButton.addEventListener('click', deleteAnimalRecord);
   exitAppButton.addEventListener('click', exitApp);
 
-  function HandleAddNewAnimal() {
+  function addNewAnimal() {
     addNewAnimal();
     console.log('Добавление нового животного...');
 
   }
 
-  function HandleTrainAnimal() {
+  function trainAnimal() {
     trainAnimal();
     console.log('Обучение животного новым командам...');
   }
 
-  function HandleViewCommandListById() {
+  function viewCommandListById() {
     viewCommandListById();
     console.log('Просмотр списка команд по ID...');
   }
